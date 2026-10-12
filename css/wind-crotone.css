@@ -1,0 +1,6943 @@
+/* ============================================================
+   CROTONE LOCAL GUIDE
+   WIND ANIMATED LAYER
+   ============================================================ */
+
+
+.wind-crotone-canvas {
+
+    /*
+     * Canvas sopra le tiles
+     * ma sotto marker e controlli.
+     */
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        450;
+
+    display:
+        block;
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    pointer-events:
+        none;
+
+    /*
+     * Colore particelle.
+     */
+
+    --wind-particle-color:
+        rgba(225, 245, 255, .88);
+
+}
+
+
+/* ============================================================
+   INFO PANEL
+   ============================================================ */
+
+.wind-crotone-panel {
+
+    position:
+        absolute;
+
+    z-index:
+        18000;
+
+    left:
+        16px;
+
+    bottom:
+        16px;
+
+    min-width:
+        165px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        3px;
+
+    padding:
+        11px 13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+
+    border-radius:
+        16px;
+
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,23,42,.92),
+            rgba(15,24,40,.90)
+        );
+
+    box-shadow:
+        0 12px 36px
+        rgba(0,0,0,.27);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+    pointer-events:
+        auto;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+}
+
+
+/* ============================================================
+   HEAD
+   ============================================================ */
+
+.wind-crotone-panel-head {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+}
+
+
+.wind-crotone-panel-head strong {
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .02em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+/* ============================================================
+   ICON
+   ============================================================ */
+
+.wind-crotone-panel-icon {
+
+    width:
+        21px;
+
+    height:
+        21px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    transform-origin:
+        center;
+
+    border-radius:
+        50%;
+
+    color:
+        #dff6ff;
+
+    background:
+        rgba(56,189,248,.13);
+
+    font-size:
+        14px;
+
+    font-weight:
+        800;
+
+}
+
+
+/* ============================================================
+   MAIN VALUE
+   ============================================================ */
+
+.wind-crotone-panel-main {
+
+    margin-top:
+        2px;
+
+    color:
+        #ffffff;
+
+    font-size:
+        16px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.2;
+
+}
+
+
+/* ============================================================
+   DETAILS
+   ============================================================ */
+
+.wind-crotone-panel small {
+
+    color:
+        rgba(255,255,255,.63);
+
+    font-size:
+        9px;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* ============================================================
+   SOURCE
+   ============================================================ */
+
+.wind-crotone-panel a {
+
+    width:
+        fit-content;
+
+    margin-top:
+        3px;
+
+    color:
+        rgba(186,230,253,.65);
+
+    text-decoration:
+        none;
+
+    font-size:
+        8px;
+
+    line-height:
+        1.3;
+
+}
+
+
+.wind-crotone-panel a:hover {
+
+    color:
+        #bae6fd;
+
+    text-decoration:
+        underline;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media
+(max-width: 600px) {
+
+    .wind-crotone-panel {
+
+        left:
+            10px;
+
+        bottom:
+            max(
+                10px,
+                env(safe-area-inset-bottom)
+            );
+
+        min-width:
+            138px;
+
+        padding:
+            8px 10px;
+
+        border-radius:
+            13px;
+
+    }
+
+
+    .wind-crotone-panel-head strong {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .wind-crotone-panel-main {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .wind-crotone-panel small {
+
+        font-size:
+            8px;
+
+    }
+
+
+    .wind-crotone-panel a {
+
+        font-size:
+            7px;
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE LANDSCAPE
+   ============================================================ */
+
+@media
+(max-height: 520px)
+and
+(orientation: landscape) {
+
+    .wind-crotone-panel {
+
+        left:
+            10px;
+
+        bottom:
+            10px;
+
+        padding:
+            7px 9px;
+
+    }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+
+   Chi ha richiesto riduzione animazioni:
+   nascondiamo le particelle ma lasciamo i dati vento.
+   ============================================================ */
+
+@media
+(prefers-reduced-motion: reduce) {
+
+    .wind-crotone-canvas {
+
+        display:
+            none;
+
+    }
+
+}
+
+
+.wind-crotone-panel {
+
+    left:
+        auto !important;
+
+    right:
+        72px !important;
+
+}
+
+
+
+
+/* ============================================================
+   WIND FORECAST TIMELINE
+   ============================================================ */
+
+
+.wind-crotone-panel-time {
+
+    margin-top:
+        3px;
+
+    color:
+        rgba(255,255,255,.48);
+
+    font-size:
+        8px;
+
+    line-height:
+        1.35;
+
+}
+
+
+/* ============================================================
+   TIMELINE
+   ============================================================ */
+
+.wind-crotone-timeline {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap:
+        4px;
+
+    margin-top:
+        8px;
+
+    padding-top:
+        8px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.10);
+
+}
+
+
+/* ============================================================
+   TIME BUTTON
+   ============================================================ */
+
+.wind-crotone-time-btn {
+
+    min-width:
+        0;
+
+    min-height:
+        38px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        1px;
+
+    padding:
+        4px 3px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.11);
+
+    border-radius:
+        8px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    background:
+        rgba(255,255,255,.045);
+
+    cursor:
+        pointer;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease,
+        color .15s ease,
+        transform .15s ease;
+
+}
+
+
+/* label +3h ecc */
+
+.wind-crotone-time-btn span {
+
+    font-size:
+        8px;
+
+    font-weight:
+        750;
+
+    line-height:
+        1.1;
+
+}
+
+
+/* ora reale */
+
+.wind-crotone-time-btn small {
+
+    color:
+        rgba(255,255,255,.42);
+
+    font-size:
+        6px;
+
+    line-height:
+        1;
+
+}
+
+
+/* hover */
+
+.wind-crotone-time-btn:hover {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.35);
+
+    background:
+        rgba(56,189,248,.10);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* ============================================================
+   FRAME ATTIVO
+   ============================================================ */
+
+.wind-crotone-time-btn.is-active,
+.wind-crotone-time-btn[aria-pressed="true"] {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.70);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14,165,233,.38),
+            rgba(51,136,255,.27)
+        );
+
+    box-shadow:
+        0 3px 10px
+        rgba(14,165,233,.12);
+
+}
+
+
+.wind-crotone-time-btn.is-active small {
+
+    color:
+        rgba(255,255,255,.74);
+
+}
+
+
+/* ============================================================
+   PANNELLO PIÙ LARGO SOLO QUANTO SERVE ALLA TIMELINE
+   ============================================================ */
+
+.wind-crotone-panel {
+
+    min-width:
+        245px;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            220px;
+
+        max-width:
+            calc(100vw - 72px);
+
+    }
+
+
+    .wind-crotone-timeline {
+
+        gap:
+            3px;
+
+    }
+
+
+    .wind-crotone-time-btn {
+
+        min-height:
+            36px;
+
+        padding:
+            3px 2px;
+
+        border-radius:
+            7px;
+
+    }
+
+
+    .wind-crotone-time-btn span {
+
+        font-size:
+            7px;
+
+    }
+
+
+    .wind-crotone-time-btn small {
+
+        font-size:
+            6px;
+
+    }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wind-crotone-time-btn {
+
+        transition:
+            none !important;
+
+    }
+
+}
+
+
+
+.wind-crotone-time-btn span {
+    font-size: 10px !important;
+}
+
+.wind-crotone-time-btn small {
+    font-size: 8px !important;
+    font-weight: 600;
+}
+
+
+@media (max-width: 600px) {
+
+    .wind-crotone-time-btn span {
+        font-size: 9px !important;
+    }
+
+    .wind-crotone-time-btn small {
+        font-size: 7.5px !important;
+    }
+
+}
+
+/* ============================================================
+   CHIUSURA POPUP METEO CON CLICK ESTERNO
+   ============================================================ */
+
+.wind-crotone-panel.is-hidden {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: translateY(8px);
+
+}
+
+.wind-crotone-panel {
+
+    transition:
+        opacity .18s ease,
+        visibility .18s ease,
+        transform .18s ease;
+
+}
+
+/* ============================================================
+   WIND PANEL - CHIUSURA / RIAPERTURA
+   ============================================================ */
+
+.wind-crotone-panel {
+
+    transition:
+        opacity .18s ease,
+        visibility .18s ease,
+        transform .18s ease;
+
+}
+
+
+/* pannello nascosto */
+
+.wind-crotone-panel.is-hidden {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform: translateY(8px);
+
+}
+
+
+/* ============================================================
+   PULSANTE RIAPERTURA 🌬
+   ============================================================ */
+
+.wind-crotone-reopen {
+
+    position: absolute;
+
+    z-index: 18000;
+
+    right: 72px;
+
+    bottom: 16px;
+
+    width: 42px;
+
+    height: 42px;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,23,42,.94),
+            rgba(15,24,40,.92)
+        );
+
+    box-shadow:
+        0 8px 24px
+        rgba(0,0,0,.28);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    transition:
+        transform .16s ease,
+        background .16s ease,
+        opacity .16s ease;
+
+}
+
+
+/* visibile solo quando il popup è chiuso */
+
+.wind-crotone-reopen.is-visible {
+
+    display: flex;
+
+}
+
+
+/* hover desktop */
+
+.wind-crotone-reopen:hover {
+
+    transform: scale(1.07);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,36,61,.97),
+            rgba(15,28,48,.96)
+        );
+
+}
+
+
+/* focus tastiera */
+
+.wind-crotone-reopen:focus-visible {
+
+    outline:
+        2px solid
+        rgba(56,189,248,.90);
+
+    outline-offset: 3px;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /*
+     * Pannello meteo sulla destra,
+     * lasciando spazio al GPS.
+     */
+
+    .wind-crotone-panel {
+
+        left: auto !important;
+
+        right: 58px !important;
+
+        bottom:
+            max(
+                10px,
+                env(safe-area-inset-bottom)
+            ) !important;
+
+        min-width: 220px;
+
+        max-width:
+            calc(100vw - 72px);
+
+    }
+
+
+    /*
+     * Quando nascosto:
+     * piccola animazione verso il basso.
+     */
+
+    .wind-crotone-panel.is-hidden {
+
+        transform:
+            translateY(10px);
+
+    }
+
+
+    /*
+     * Pulsante 🌬 mobile.
+     */
+
+    .wind-crotone-reopen {
+
+        right: 58px;
+
+        bottom:
+            max(
+                10px,
+                env(safe-area-inset-bottom)
+            );
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 18px;
+
+        /*
+         * Dimensione sufficiente per touch
+         * senza diventare invasiva.
+         */
+
+        touch-action: manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    /*
+     * Timeline.
+     */
+
+    .wind-crotone-timeline {
+
+        gap: 3px;
+
+    }
+
+
+    .wind-crotone-time-btn {
+
+        min-height: 36px;
+
+        padding:
+            3px 2px;
+
+        border-radius: 7px;
+
+        touch-action: manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    /*
+     * +3h / +6h / +12h / +24h
+     */
+
+    .wind-crotone-time-btn span {
+
+        font-size:
+            9px !important;
+
+        font-weight: 750;
+
+    }
+
+
+    /*
+     * 14:00 / 17:00 ecc.
+     */
+
+    .wind-crotone-time-btn small {
+
+        font-size:
+            7.5px !important;
+
+        font-weight: 600;
+
+    }
+
+
+    /*
+     * Dato principale.
+     */
+
+    .wind-crotone-panel-main {
+
+        font-size: 14px;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI MOLTO PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-panel {
+
+        right: 52px !important;
+
+        min-width: 205px;
+
+        max-width:
+            calc(100vw - 62px);
+
+    }
+
+
+    .wind-crotone-reopen {
+
+        right: 52px;
+
+        width: 20px;
+
+        height: 38px;
+
+        font-size: 17px;
+
+    }
+
+
+    .wind-crotone-time-btn span {
+
+        font-size:
+            8px !important;
+
+    }
+
+
+    .wind-crotone-time-btn small {
+
+        font-size:
+            7px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE LANDSCAPE
+   ============================================================ */
+
+@media
+(max-height: 520px)
+and
+(orientation: landscape) {
+
+    .wind-crotone-panel {
+
+        right: 58px !important;
+
+        bottom: 10px !important;
+
+        max-height:
+            calc(100dvh - 20px);
+
+        overflow-y: auto;
+
+    }
+
+
+    .wind-crotone-reopen {
+
+        right: 58px;
+
+        bottom: 10px;
+
+    }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wind-crotone-panel,
+    .wind-crotone-reopen,
+    .wind-crotone-time-btn {
+
+        transition:
+            none !important;
+
+    }
+
+}
+
+/* ============================================================
+   WIND PANEL - MIGLIORE LEGGIBILITÀ
+   Desktop + Mobile
+   ============================================================ */
+
+
+/* ============================================================
+   ICONA 🌬 QUANDO IL POPUP È CHIUSO
+   La solleviamo rispetto alla posizione attuale
+   ============================================================ */
+
+.wind-crotone-reopen {
+
+    /*
+     * Prima era circa 16px.
+     * Aumentando bottom la solleviamo.
+     */
+
+    bottom: 20px !important;
+
+    width: 46px;
+
+    height: 46px;
+
+    font-size: 22px;
+}
+
+
+/* ============================================================
+   RAFFICHE
+   ============================================================ */
+
+.wind-crotone-panel > small {
+
+    font-size: 12px !important;
+
+    font-weight: 650;
+
+    line-height: 1.45;
+
+    color:
+        rgba(255,255,255,.82) !important;
+
+}
+
+
+/* ============================================================
+   "CONDIZIONI ATTUALI"
+   "PREVISIONE ORE 15:00"
+   ============================================================ */
+
+.wind-crotone-panel-time {
+
+    margin-top: 5px;
+
+    font-size: 11px !important;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    color:
+        rgba(255,255,255,.72) !important;
+
+}
+
+
+/* ============================================================
+   TIMELINE
+
+   Adesso | +3h | +6h | +12h | +24h
+   ============================================================ */
+
+.wind-crotone-time-btn {
+
+    min-height: 46px !important;
+
+    padding:
+        6px 4px !important;
+
+}
+
+
+/* ============================================================
+   TESTO:
+   Adesso
+   +3h
+   +6h
+   +12h
+   +24h
+   ============================================================ */
+
+.wind-crotone-time-btn span {
+
+    font-size: 12px !important;
+
+    font-weight: 800 !important;
+
+    line-height: 1.15;
+
+}
+
+
+/* ============================================================
+   ORARI:
+   ora
+   15:00
+   18:00
+   00:00
+   ecc.
+   ============================================================ */
+
+.wind-crotone-time-btn small {
+
+    margin-top: 2px;
+
+    font-size: 10px !important;
+
+    font-weight: 650 !important;
+
+    line-height: 1.1;
+
+    color:
+        rgba(255,255,255,.70) !important;
+
+}
+
+
+/* ============================================================
+   ELEMENTO ATTIVO DELLA TIMELINE
+   Ancora più leggibile
+   ============================================================ */
+
+.wind-crotone-time-btn.is-active span,
+.wind-crotone-time-btn[aria-pressed="true"] span {
+
+    color: #ffffff;
+
+}
+
+
+.wind-crotone-time-btn.is-active small,
+.wind-crotone-time-btn[aria-pressed="true"] small {
+
+    color:
+        rgba(255,255,255,.90) !important;
+
+}
+
+
+/* ============================================================
+   DESKTOP
+   ============================================================ */
+
+@media (min-width: 601px) {
+
+    /*
+     * Un po' più largo per ospitare bene
+     * i testi ingranditi.
+     */
+
+    .wind-crotone-panel {
+
+        min-width:
+            285px !important;
+
+    }
+
+
+    /*
+     * Icona chiusa leggermente sollevata.
+     */
+
+    .wind-crotone-reopen {
+
+        right:
+            72px !important;
+
+        bottom:
+            42px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    /*
+     * Popup sufficientemente largo
+     * per la timeline più leggibile.
+     */
+
+    .wind-crotone-panel {
+
+        min-width:
+            245px !important;
+
+        max-width:
+            calc(100vw - 70px) !important;
+
+    }
+
+
+    /* --------------------------------------------------------
+       RAFFICHE
+       -------------------------------------------------------- */
+
+    .wind-crotone-panel > small {
+
+        font-size:
+            11px !important;
+
+        font-weight:
+            650;
+
+    }
+
+
+    /* --------------------------------------------------------
+       CONDIZIONI ATTUALI
+       -------------------------------------------------------- */
+
+    .wind-crotone-panel-time {
+
+        font-size:
+            10px !important;
+
+        font-weight:
+            600;
+
+    }
+
+
+    /* --------------------------------------------------------
+       PULSANTI TIMELINE
+       -------------------------------------------------------- */
+
+    .wind-crotone-time-btn {
+
+        min-height:
+            44px !important;
+
+        padding:
+            5px 2px !important;
+
+    }
+
+
+    /* +3h / +6h / ecc. */
+
+    .wind-crotone-time-btn span {
+
+        font-size:
+            11px !important;
+
+        font-weight:
+            800 !important;
+
+    }
+
+
+    /* 15:00 / 18:00 ecc. */
+
+    .wind-crotone-time-btn small {
+
+        font-size:
+            9px !important;
+
+        font-weight:
+            650 !important;
+
+    }
+
+
+    /* --------------------------------------------------------
+       ICONA 🌬 QUANDO POPUP CHIUSO
+
+       Più alta rispetto al GPS.
+       -------------------------------------------------------- */
+
+    .wind-crotone-reopen {
+
+        right:
+            58px !important;
+
+        bottom:
+            20px !important;
+
+        width:
+            44px;
+
+        height:
+            44px;
+
+        font-size:
+            21px;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            225px !important;
+
+    }
+
+
+    .wind-crotone-time-btn span {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-time-btn small {
+
+        font-size:
+            8.5px !important;
+
+    }
+
+
+    .wind-crotone-panel > small {
+
+        font-size:
+            10.5px !important;
+
+    }
+
+
+    .wind-crotone-panel-time {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+
+    .wind-crotone-reopen {
+
+        right:
+            52px !important;
+
+        bottom:
+            20px !important;
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        font-size:
+            20px;
+
+    }
+
+}
+
+/* ============================================================
+   WIND FORECAST 3 DAYS
+   GIORNI + ORARI
+   Inserire IN FONDO al wind-crotone.css
+   ============================================================ */
+
+
+/* ============================================================
+   PANNELLO
+   ============================================================ */
+
+.wind-crotone-panel {
+
+    min-width:
+        300px !important;
+
+}
+
+
+/* ============================================================
+   RAFFICHE
+   ============================================================ */
+
+.wind-crotone-panel > small {
+
+    font-size:
+        12px !important;
+
+    font-weight:
+        650 !important;
+
+    line-height:
+        1.45;
+
+    color:
+        rgba(255,255,255,.84) !important;
+
+}
+
+
+/* ============================================================
+   CONDIZIONI ATTUALI / GIORNO + ORA
+   ============================================================ */
+
+.wind-crotone-panel-time {
+
+    margin-top:
+        5px;
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        650;
+
+    line-height:
+        1.4;
+
+    color:
+        rgba(255,255,255,.72) !important;
+
+}
+
+
+/* ============================================================
+   SELETTORE GIORNI
+   ============================================================ */
+
+.wind-crotone-days {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        5px;
+
+    margin-top:
+        10px;
+
+    padding-top:
+        9px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.11);
+
+}
+
+
+/* ============================================================
+   PULSANTE GIORNO
+   ============================================================ */
+
+.wind-crotone-day-btn {
+
+    min-height:
+        38px;
+
+    padding:
+        6px 5px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius:
+        9px;
+
+    color:
+        rgba(255,255,255,.78);
+
+    background:
+        rgba(255,255,255,.045);
+
+    cursor:
+        pointer;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+    line-height:
+        1.2;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease,
+        color .15s ease,
+        transform .15s ease;
+
+}
+
+
+.wind-crotone-day-btn:hover {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.40);
+
+    background:
+        rgba(56,189,248,.10);
+
+}
+
+
+.wind-crotone-day-btn.is-active {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.75);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14,165,233,.40),
+            rgba(51,136,255,.28)
+        );
+
+}
+
+
+/* ============================================================
+   SELETTORE ORARI
+   ============================================================ */
+
+.wind-crotone-hours {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        5px;
+
+    margin-top:
+        7px;
+
+}
+
+
+/* ============================================================
+   PULSANTE ORA
+   ============================================================ */
+
+.wind-crotone-hour-btn {
+
+    min-height:
+        40px;
+
+    padding:
+        6px 4px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.11);
+
+    border-radius:
+        9px;
+
+    color:
+        rgba(255,255,255,.79);
+
+    background:
+        rgba(255,255,255,.04);
+
+    cursor:
+        pointer;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        750;
+
+    line-height:
+        1;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease,
+        color .15s ease,
+        transform .15s ease;
+
+}
+
+
+.wind-crotone-hour-btn:hover {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.38);
+
+    background:
+        rgba(56,189,248,.09);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* ============================================================
+   ORA ATTIVA
+   ============================================================ */
+
+.wind-crotone-hour-btn.is-active {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.78);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14,165,233,.42),
+            rgba(51,136,255,.29)
+        );
+
+    box-shadow:
+        0 3px 10px
+        rgba(14,165,233,.13);
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            255px !important;
+
+        max-width:
+            calc(100vw - 70px) !important;
+
+    }
+
+
+    /* RAFFICHE */
+
+    .wind-crotone-panel > small {
+
+        font-size:
+            11px !important;
+
+    }
+
+
+    /* CONDIZIONI / DATA */
+
+    .wind-crotone-panel-time {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    /* GIORNI */
+
+    .wind-crotone-days {
+
+        gap:
+            4px;
+
+        margin-top:
+            8px;
+
+    }
+
+
+    .wind-crotone-day-btn {
+
+        min-height:
+            38px;
+
+        padding:
+            5px 3px;
+
+        font-size:
+            10px;
+
+        border-radius:
+            8px;
+
+        touch-action:
+            manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    /* ORE */
+
+    .wind-crotone-hours {
+
+        gap:
+            4px;
+
+        margin-top:
+            6px;
+
+    }
+
+
+    .wind-crotone-hour-btn {
+
+        min-height:
+            40px;
+
+        padding:
+            5px 3px;
+
+        font-size:
+            11px;
+
+        border-radius:
+            8px;
+
+        touch-action:
+            manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            235px !important;
+
+    }
+
+
+    .wind-crotone-day-btn {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .wind-crotone-hour-btn {
+
+        font-size:
+            10px;
+
+    }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wind-crotone-day-btn,
+    .wind-crotone-hour-btn {
+
+        transition:
+            none !important;
+
+    }
+
+}
+
+/* ============================================================
+   WIND CROTONE
+   RICERCA LOCALITÀ + PREVISIONE PROVINCIALE
+   ============================================================ */
+
+
+/* ============================================================
+   PANNELLO
+   ============================================================ */
+
+.wind-crotone-panel {
+
+    min-width:
+        310px !important;
+
+}
+
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+.wind-crotone-search {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    margin-bottom:
+        8px;
+
+    z-index:
+        20;
+
+}
+
+
+.wind-crotone-search-row {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    width:
+        100%;
+
+    gap:
+        5px;
+
+}
+
+
+/* ============================================================
+   INPUT
+   ============================================================ */
+
+.wind-crotone-search-input {
+
+    min-width:
+        0;
+
+    flex:
+        1 1 auto;
+
+    height:
+        36px;
+
+    padding:
+        0 10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    border-radius:
+        9px;
+
+    outline:
+        none;
+
+    color:
+        #ffffff;
+
+    background:
+        rgba(255,255,255,.055);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+    box-sizing:
+        border-box;
+
+    transition:
+        border-color .15s ease,
+        background .15s ease,
+        box-shadow .15s ease;
+
+}
+
+
+.wind-crotone-search-input::placeholder {
+
+    color:
+        rgba(255,255,255,.48);
+
+}
+
+
+.wind-crotone-search-input:focus {
+
+    border-color:
+        rgba(56,189,248,.68);
+
+    background:
+        rgba(255,255,255,.075);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(56,189,248,.09);
+
+}
+
+
+/* ============================================================
+   SEARCH BUTTON
+   ============================================================ */
+
+.wind-crotone-search-btn {
+
+    flex:
+        0 0 36px;
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        1px solid
+        rgba(56,189,248,.28);
+
+    border-radius:
+        9px;
+
+    color:
+        #dff6ff;
+
+    background:
+        rgba(56,189,248,.10);
+
+    cursor:
+        pointer;
+
+    font-size:
+        22px;
+
+    line-height:
+        1;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease;
+
+}
+
+
+.wind-crotone-search-btn:hover {
+
+    border-color:
+        rgba(56,189,248,.60);
+
+    background:
+        rgba(56,189,248,.18);
+
+}
+
+
+/* ============================================================
+   RISULTATI SEARCH
+   ============================================================ */
+
+.wind-crotone-search-results {
+
+    position:
+        absolute;
+
+    top:
+        calc(100% + 5px);
+
+    left:
+        0;
+
+    right:
+        0;
+
+    z-index:
+        100;
+
+    display:
+        none;
+
+    max-height:
+        210px;
+
+    overflow-y:
+        auto;
+
+    padding:
+        5px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(9,18,32,.98);
+
+    box-shadow:
+        0 12px 32px
+        rgba(0,0,0,.38);
+
+    backdrop-filter:
+        blur(16px);
+
+    -webkit-backdrop-filter:
+        blur(16px);
+
+}
+
+
+.wind-crotone-search-results.is-visible {
+
+    display:
+        block;
+
+}
+
+
+/* ============================================================
+   SINGOLO RISULTATO
+   ============================================================ */
+
+.wind-crotone-search-result {
+
+    width:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    gap:
+        2px;
+
+    padding:
+        8px 9px;
+
+    border:
+        0;
+
+    border-radius:
+        7px;
+
+    color:
+        #ffffff;
+
+    background:
+        transparent;
+
+    cursor:
+        pointer;
+
+    text-align:
+        left;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+}
+
+
+.wind-crotone-search-result:hover {
+
+    background:
+        rgba(56,189,248,.11);
+
+}
+
+
+.wind-crotone-search-result strong {
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+}
+
+
+.wind-crotone-search-result small {
+
+    font-size:
+        9px !important;
+
+    font-weight:
+        500 !important;
+
+    color:
+        rgba(255,255,255,.55) !important;
+
+}
+
+
+/* ============================================================
+   SEARCH STATUS
+   ============================================================ */
+
+.wind-crotone-search-status {
+
+    padding:
+        9px;
+
+    color:
+        rgba(255,255,255,.62);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* ============================================================
+   LOCALITÀ SELEZIONATA
+   ============================================================ */
+
+.wind-crotone-location {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+    margin-bottom:
+        7px;
+
+    padding-bottom:
+        7px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.09);
+
+    color:
+        rgba(186,230,253,.88);
+
+}
+
+
+.wind-crotone-location span {
+
+    flex:
+        0 0 auto;
+
+    font-size:
+        14px;
+
+}
+
+
+.wind-crotone-location strong {
+
+    min-width:
+        0;
+
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+}
+
+
+/* ============================================================
+   LOADING
+   ============================================================ */
+
+.wind-crotone-loading {
+
+    padding:
+        10px 2px 4px;
+
+    color:
+        rgba(255,255,255,.67);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        600;
+
+}
+
+
+/* ============================================================
+   RAFFICHE / DATA
+   ============================================================ */
+
+.wind-crotone-panel > small {
+
+    font-size:
+        12px !important;
+
+    font-weight:
+        650 !important;
+
+    color:
+        rgba(255,255,255,.84) !important;
+
+}
+
+
+.wind-crotone-panel-time {
+
+    margin-top:
+        5px;
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        650;
+
+    color:
+        rgba(255,255,255,.72) !important;
+
+}
+
+
+/* ============================================================
+   GIORNI
+   ============================================================ */
+
+.wind-crotone-days {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        5px;
+
+    margin-top:
+        10px;
+
+    padding-top:
+        9px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.11);
+
+}
+
+
+.wind-crotone-day-btn {
+
+    min-height:
+        38px;
+
+    padding:
+        6px 4px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius:
+        9px;
+
+    color:
+        rgba(255,255,255,.80);
+
+    background:
+        rgba(255,255,255,.045);
+
+    cursor:
+        pointer;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+}
+
+
+.wind-crotone-day-btn:hover {
+
+    color:
+        #fff;
+
+    border-color:
+        rgba(56,189,248,.40);
+
+    background:
+        rgba(56,189,248,.10);
+
+}
+
+
+.wind-crotone-day-btn.is-active {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.75);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14,165,233,.40),
+            rgba(51,136,255,.28)
+        );
+
+}
+
+
+/* ============================================================
+   ORE
+   ============================================================ */
+
+.wind-crotone-hours {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        5px;
+
+    margin-top:
+        7px;
+
+}
+
+
+.wind-crotone-hour-btn {
+
+    min-height:
+        40px;
+
+    padding:
+        6px 4px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.11);
+
+    border-radius:
+        9px;
+
+    color:
+        rgba(255,255,255,.82);
+
+    background:
+        rgba(255,255,255,.04);
+
+    cursor:
+        pointer;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        750;
+
+}
+
+
+.wind-crotone-hour-btn:hover {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.38);
+
+    background:
+        rgba(56,189,248,.09);
+
+}
+
+
+.wind-crotone-hour-btn.is-active {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.78);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14,165,233,.42),
+            rgba(51,136,255,.29)
+        );
+
+    box-shadow:
+        0 3px 10px
+        rgba(14,165,233,.13);
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            265px !important;
+
+        max-width:
+            calc(100vw - 70px) !important;
+
+    }
+
+
+    /*
+     * 16px impedisce anche lo zoom
+     * automatico dell'input su iPhone.
+     */
+
+    .wind-crotone-search-input {
+
+        height:
+            38px;
+
+        font-size:
+            16px;
+
+    }
+
+
+    .wind-crotone-search-btn {
+
+        flex-basis:
+            38px;
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+    }
+
+
+    .wind-crotone-search-results {
+
+        max-height:
+            185px;
+
+    }
+
+
+    .wind-crotone-search-result {
+
+        padding:
+            9px 8px;
+
+        touch-action:
+            manipulation;
+
+    }
+
+
+    .wind-crotone-search-result strong {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .wind-crotone-search-result small {
+
+        font-size:
+            9px !important;
+
+    }
+
+
+    .wind-crotone-location strong {
+
+        font-size:
+            10.5px;
+
+    }
+
+
+    .wind-crotone-panel > small {
+
+        font-size:
+            11px !important;
+
+    }
+
+
+    .wind-crotone-panel-time {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-days {
+
+        gap:
+            4px;
+
+    }
+
+
+    .wind-crotone-day-btn {
+
+        min-height:
+            38px;
+
+        font-size:
+            10px;
+
+        touch-action:
+            manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    .wind-crotone-hours {
+
+        gap:
+            4px;
+
+    }
+
+
+    .wind-crotone-hour-btn {
+
+        min-height:
+            40px;
+
+        font-size:
+            11px;
+
+        touch-action:
+            manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            240px !important;
+
+    }
+
+
+    .wind-crotone-day-btn {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .wind-crotone-hour-btn {
+
+        font-size:
+            10px;
+
+    }
+
+}
+
+
+/* ============================================================
+   SOLO DESKTOP - POSIZIONE ICONA RIAPERTURA VENTO
+   ============================================================ */
+
+@media (min-width: 601px) {
+
+    .wind-crotone-reopen.is-visible {
+
+        position: absolute !important;
+
+        right: 72px !important;
+
+        bottom: 20px !important;
+
+        transform: none !important;
+
+    }
+
+}
+
+@media (min-width: 601px) {
+
+    .wind-crotone-reopen.is-visible:hover {
+
+        transform: scale(1.07) !important;
+
+    }
+
+}
+
+/* ============================================================
+   CROTONE LOCAL GUIDE
+   WEATHER UX
+   AGGIUNGERE IN FONDO ASSOLUTO AL CSS
+   ============================================================ */
+
+
+/* ============================================================
+   PANNELLO
+   ============================================================ */
+
+.wind-crotone-panel {
+
+    min-width:
+        330px !important;
+
+    max-width:
+        350px !important;
+
+}
+
+
+/* ============================================================
+   METEO
+   ============================================================ */
+
+.wind-crotone-weather {
+
+    width:
+        100%;
+
+    margin-top:
+        2px;
+
+    padding-bottom:
+        9px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.10);
+
+}
+
+
+/* ============================================================
+   METEO SUMMARY
+   ICONA + TEMPERATURA + CONDIZIONE
+   ============================================================ */
+
+.wind-crotone-weather-summary {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        40px auto 1fr;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    min-width:
+        0;
+
+}
+
+
+.wind-crotone-weather-icon {
+
+    width:
+        40px;
+
+    height:
+        40px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.10);
+
+    border-radius:
+        12px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    font-size:
+        24px;
+
+    line-height:
+        1;
+
+}
+
+
+.wind-crotone-weather-temperature {
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        28px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1;
+
+    letter-spacing:
+        -.04em;
+
+}
+
+
+.wind-crotone-weather-copy {
+
+    min-width:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        2px;
+
+}
+
+
+.wind-crotone-weather-copy strong {
+
+    overflow:
+        hidden;
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+    line-height:
+        1.25;
+
+    text-overflow:
+        ellipsis;
+
+}
+
+
+.wind-crotone-weather-copy small {
+
+    color:
+        rgba(255,255,255,.61) !important;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        9px !important;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.25;
+
+}
+
+
+/* ============================================================
+   GRIGLIA DATI METEO
+   ============================================================ */
+
+.wind-crotone-weather-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        5px;
+
+    margin-top:
+        9px;
+
+}
+
+
+/* ============================================================
+   SINGOLA METRICA
+   ============================================================ */
+
+.wind-crotone-weather-metric {
+
+    min-width:
+        0;
+
+    min-height:
+        45px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    grid-template-rows:
+        auto auto;
+
+    align-items:
+        center;
+
+    column-gap:
+        6px;
+
+    padding:
+        6px 8px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.085);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    box-sizing:
+        border-box;
+
+}
+
+
+.wind-crotone-weather-metric-label {
+
+    min-width:
+        0;
+
+    overflow:
+        hidden;
+
+    color:
+        rgba(255,255,255,.53);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        9px;
+
+    font-weight:
+        650;
+
+    line-height:
+        1.15;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.wind-crotone-weather-metric-value {
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.1;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.wind-crotone-weather-metric-detail {
+
+    grid-column:
+        1 / -1;
+
+    margin-top:
+        2px;
+
+    color:
+        rgba(186,230,253,.61) !important;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        8px !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.15;
+
+}
+
+
+/* ============================================================
+   DIVISIONE METEO / VENTO
+   ============================================================ */
+
+.wind-crotone-wind-head {
+
+    margin-top:
+        9px;
+
+    padding-top:
+        1px;
+
+}
+
+
+/* ============================================================
+   VENTO
+   ============================================================ */
+
+.wind-crotone-panel-main {
+
+    font-size:
+        16px !important;
+
+}
+
+
+.wind-crotone-panel > small {
+
+    font-size:
+        12px !important;
+
+    font-weight:
+        650 !important;
+
+    color:
+        rgba(255,255,255,.84) !important;
+
+}
+
+
+/* ============================================================
+   DATA / ORA
+   ============================================================ */
+
+.wind-crotone-panel-time {
+
+    margin-top:
+        5px;
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        650;
+
+    color:
+        rgba(255,255,255,.72) !important;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            278px !important;
+
+        width:
+            278px !important;
+
+        max-width:
+            calc(100vw - 68px) !important;
+
+        box-sizing:
+            border-box;
+
+    }
+
+
+    .wind-crotone-weather-summary {
+
+        grid-template-columns:
+            37px auto 1fr;
+
+        gap:
+            7px;
+
+    }
+
+
+    .wind-crotone-weather-icon {
+
+        width:
+            37px;
+
+        height:
+            37px;
+
+        border-radius:
+            10px;
+
+        font-size:
+            22px;
+
+    }
+
+
+    .wind-crotone-weather-temperature {
+
+        font-size:
+            25px;
+
+    }
+
+
+    .wind-crotone-weather-copy strong {
+
+        font-size:
+            10.5px;
+
+    }
+
+
+    .wind-crotone-weather-copy small {
+
+        font-size:
+            9px !important;
+
+    }
+
+
+    .wind-crotone-weather-grid {
+
+        gap:
+            4px;
+
+        margin-top:
+            7px;
+
+    }
+
+
+    .wind-crotone-weather-metric {
+
+        min-height:
+            43px;
+
+        padding:
+            5px 6px;
+
+        border-radius:
+            8px;
+
+    }
+
+
+    .wind-crotone-weather-metric-label {
+
+        font-size:
+            8.5px;
+
+    }
+
+
+    .wind-crotone-weather-metric-value {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .wind-crotone-weather-metric-detail {
+
+        font-size:
+            7.5px !important;
+
+    }
+
+
+    .wind-crotone-panel-main {
+
+        font-size:
+            14px !important;
+
+    }
+
+
+    .wind-crotone-panel > small {
+
+        font-size:
+            11px !important;
+
+    }
+
+
+    .wind-crotone-panel-time {
+
+        font-size:
+            10px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            250px !important;
+
+        width:
+            250px !important;
+
+        max-width:
+            calc(100vw - 60px) !important;
+
+    }
+
+
+    .wind-crotone-weather-temperature {
+
+        font-size:
+            23px;
+
+    }
+
+
+    .wind-crotone-weather-metric-value {
+
+        font-size:
+            10.5px;
+
+    }
+
+
+    .wind-crotone-weather-metric-label {
+
+        font-size:
+            8px;
+
+    }
+
+}
+
+
+/* ============================================================
+   LANDSCAPE MOBILE
+   ============================================================ */
+
+@media
+(max-height: 520px)
+and
+(orientation: landscape) {
+
+    .wind-crotone-panel {
+
+        max-height:
+            calc(100dvh - 20px);
+
+        overflow-y:
+            auto;
+
+        overscroll-behavior:
+            contain;
+
+    }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wind-crotone-weather *,
+    .wind-crotone-weather-metric {
+
+        transition:
+            none !important;
+
+    }
+
+}
+
+/* ============================================================
+   WEATHER - TESTI PIÙ LEGGIBILI
+   Inserire IN FONDO al CSS
+   ============================================================ */
+
+
+/* Testo condizione sotto/accanto alla temperatura:
+   "Sereno", "Parzialmente nuvoloso", ecc. */
+.wind-crotone-weather-copy strong {
+
+    font-size:
+        13px !important;
+
+    font-weight:
+        800 !important;
+
+    line-height:
+        1.25;
+
+}
+
+
+/* "Percepita 21°" */
+.wind-crotone-weather-copy small {
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        650 !important;
+
+    color:
+        rgba(255,255,255,.78) !important;
+
+}
+
+
+/* Etichette dentro i riquadri:
+   Precipit.
+   Nuvole
+   Umidità
+   Pressione */
+.wind-crotone-weather-metric-label {
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        700 !important;
+
+    color:
+        rgba(255,255,255,.72) !important;
+
+}
+
+
+/* Valori principali:
+   5%
+   67%
+   45%
+   1017 hPa */
+.wind-crotone-weather-metric-value {
+
+    font-size:
+        14px !important;
+
+    font-weight:
+        800 !important;
+
+    color:
+        #ffffff !important;
+
+}
+
+
+/* Dettaglio sotto Precipitazioni:
+   es. 0.2 mm */
+.wind-crotone-weather-metric-detail {
+
+    font-size:
+        10px !important;
+
+    font-weight:
+        650 !important;
+
+    color:
+        rgba(186,230,253,.82) !important;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-weather-copy strong {
+
+        font-size:
+            12px !important;
+
+    }
+
+
+    .wind-crotone-weather-copy small {
+
+        font-size:
+            10.5px !important;
+
+    }
+
+
+    .wind-crotone-weather-metric-label {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-weather-metric-value {
+
+        font-size:
+            13px !important;
+
+    }
+
+
+    .wind-crotone-weather-metric-detail {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-weather-copy strong {
+
+        font-size:
+            11.5px !important;
+
+    }
+
+
+    .wind-crotone-weather-copy small {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-weather-metric-label {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+
+    .wind-crotone-weather-metric-value {
+
+        font-size:
+            12.5px !important;
+
+    }
+
+
+    .wind-crotone-weather-metric-detail {
+
+        font-size:
+            9px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   CROTONE LOCAL GUIDE
+   UPGRADE MARE + PESCA
+
+   AGGIUNGERE IN FONDO ASSOLUTO A wind-crotone.css
+
+   Non modifica la posizione di .wind-crotone-reopen.
+   ============================================================ */
+
+
+/* ============================================================
+   PANNELLO
+   ============================================================ */
+
+.wind-crotone-panel {
+
+    min-width:
+        340px !important;
+
+    max-width:
+        360px !important;
+
+}
+
+
+/* ============================================================
+   TAB METEO / MARE / PESCA
+   ============================================================ */
+
+.wind-crotone-tabs {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap:
+        5px;
+
+    margin:
+        4px 0 9px;
+
+    padding:
+        4px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:
+        11px;
+
+    background:
+        rgba(255,255,255,.035);
+
+}
+
+
+.wind-crotone-tab-btn {
+
+    min-width:
+        0;
+
+    min-height:
+        34px;
+
+    padding:
+        5px 7px;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius:
+        8px;
+
+    color:
+        rgba(255,255,255,.66);
+
+    background:
+        transparent;
+
+    cursor:
+        pointer;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+    line-height:
+        1;
+
+    transition:
+        color .15s ease,
+        background .15s ease,
+        border-color .15s ease;
+
+}
+
+
+.wind-crotone-tab-btn:hover {
+
+    color:
+        #ffffff;
+
+    background:
+        rgba(56,189,248,.08);
+
+}
+
+
+.wind-crotone-tab-btn.is-active,
+.wind-crotone-tab-btn[aria-selected="true"] {
+
+    color:
+        #ffffff;
+
+    border-color:
+        rgba(56,189,248,.52);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(14,165,233,.29),
+            rgba(51,136,255,.18)
+        );
+
+}
+
+
+/* ============================================================
+   BLOCCO MARE
+   ============================================================ */
+
+.wind-crotone-marine {
+
+    width:
+        100%;
+
+}
+
+
+.wind-crotone-marine-hero {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    padding:
+        8px 9px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:
+        11px;
+
+    background:
+        rgba(56,189,248,.055);
+
+}
+
+
+.wind-crotone-marine-icon {
+
+    flex:
+        0 0 40px;
+
+    width:
+        40px;
+
+    height:
+        40px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(56,189,248,.09);
+
+    font-size:
+        23px;
+
+    line-height:
+        1;
+
+}
+
+
+.wind-crotone-marine-hero > div {
+
+    min-width:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        3px;
+
+}
+
+
+.wind-crotone-marine-hero strong {
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        10px;
+
+    font-weight:
+        750;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .02em;
+
+}
+
+
+.wind-crotone-marine-hero-value {
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.15;
+
+}
+
+
+/* ============================================================
+   GRIGLIA MARE
+   ============================================================ */
+
+.wind-crotone-marine-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        5px;
+
+    margin-top:
+        7px;
+
+}
+
+
+.wind-crotone-marine-metric {
+
+    min-width:
+        0;
+
+    min-height:
+        51px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    grid-template-rows:
+        auto auto;
+
+    align-items:
+        center;
+
+    column-gap:
+        6px;
+
+    padding:
+        7px 8px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.085);
+
+    border-radius:
+        9px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    box-sizing:
+        border-box;
+
+}
+
+
+.wind-crotone-marine-label {
+
+    min-width:
+        0;
+
+    overflow:
+        hidden;
+
+    color:
+        rgba(255,255,255,.67);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.15;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.wind-crotone-marine-value {
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.1;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.wind-crotone-marine-detail {
+
+    grid-column:
+        1 / -1;
+
+    margin-top:
+        3px;
+
+    overflow:
+        hidden;
+
+    color:
+        rgba(186,230,253,.72) !important;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        9px !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.25;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.wind-crotone-marine-note {
+
+    display:
+        block;
+
+    margin-top:
+        7px;
+
+    color:
+        rgba(255,255,255,.47) !important;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        8.5px !important;
+
+    font-weight:
+        550 !important;
+
+    line-height:
+        1.35;
+
+}
+
+
+/* ============================================================
+   MARE NON DISPONIBILE
+   ============================================================ */
+
+.wind-crotone-marine-empty {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        9px;
+
+    padding:
+        10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,.035);
+
+}
+
+
+.wind-crotone-marine-empty > span {
+
+    flex:
+        0 0 auto;
+
+    font-size:
+        22px;
+
+    line-height:
+        1;
+
+}
+
+
+.wind-crotone-marine-empty > div {
+
+    min-width:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        3px;
+
+}
+
+
+.wind-crotone-marine-empty strong {
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    font-weight:
+        750;
+
+}
+
+
+.wind-crotone-marine-empty small {
+
+    color:
+        rgba(255,255,255,.58) !important;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        9px !important;
+
+    font-weight:
+        550 !important;
+
+    line-height:
+        1.35;
+
+}
+
+
+/* ============================================================
+   PESCA
+   ============================================================ */
+
+.wind-crotone-fishing {
+
+    width:
+        100%;
+
+}
+
+
+.wind-crotone-fishing-header {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        38px minmax(0, 1fr) auto;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+}
+
+
+.wind-crotone-fishing-icon {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(56,189,248,.055);
+
+    font-size:
+        22px;
+
+}
+
+
+.wind-crotone-fishing-header > div:nth-child(2) {
+
+    min-width:
+        0;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        2px;
+
+}
+
+
+.wind-crotone-fishing-header strong {
+
+    overflow:
+        hidden;
+
+    color:
+        #ffffff;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        12px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.2;
+
+    text-overflow:
+        ellipsis;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.wind-crotone-fishing-header small {
+
+    color:
+        rgba(255,255,255,.56) !important;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        9px !important;
+
+    font-weight:
+        600 !important;
+
+}
+
+
+.wind-crotone-fishing-badge {
+
+    min-width:
+        56px;
+
+    padding:
+        6px 8px;
+
+    border:
+        1px solid
+        rgba(56,189,248,.35);
+
+    border-radius:
+        999px;
+
+    color:
+        #ffffff;
+
+    background:
+        rgba(56,189,248,.10);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1;
+
+    text-align:
+        center;
+
+    white-space:
+        nowrap;
+
+}
+
+
+/* ============================================================
+   INDICATORE PESCA
+   ============================================================ */
+
+.wind-crotone-fishing-meter {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        7px;
+
+    margin-top:
+        10px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,.075);
+
+}
+
+
+.wind-crotone-fishing-meter-bar {
+
+    width:
+        0;
+
+    height:
+        100%;
+
+    border-radius:
+        inherit;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(56,189,248,.52),
+            rgba(125,211,252,.92)
+        );
+
+    transition:
+        width .2s ease;
+
+}
+
+
+.wind-crotone-fishing-score {
+
+    margin-top:
+        4px;
+
+    color:
+        rgba(255,255,255,.72);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        9px;
+
+    font-weight:
+        750;
+
+    text-align:
+        right;
+
+}
+
+
+.wind-crotone-fishing-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap:
+        5px;
+
+    margin-top:
+        7px;
+
+}
+
+
+.wind-crotone-fishing-factors {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        4px;
+
+    margin-top:
+        7px;
+
+}
+
+
+.wind-crotone-fishing-factors span {
+
+    padding:
+        4px 6px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.085);
+
+    border-radius:
+        999px;
+
+    color:
+        rgba(255,255,255,.69);
+
+    background:
+        rgba(255,255,255,.035);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        8.5px;
+
+    font-weight:
+        650;
+
+    line-height:
+        1;
+
+}
+
+
+.wind-crotone-fishing-note {
+
+    display:
+        block;
+
+    margin-top:
+        8px;
+
+    color:
+        rgba(255,255,255,.47) !important;
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size:
+        8.5px !important;
+
+    font-weight:
+        550 !important;
+
+    line-height:
+        1.35;
+
+}
+
+
+/* ============================================================
+   SPAZIATURA
+   ============================================================ */
+
+.wind-crotone-tabs + .wind-crotone-weather,
+.wind-crotone-tabs + .wind-crotone-marine,
+.wind-crotone-tabs + .wind-crotone-fishing,
+.wind-crotone-tabs + .wind-crotone-loading,
+.wind-crotone-tabs + .wind-crotone-marine-empty {
+
+    margin-bottom:
+        7px;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            286px !important;
+
+        width:
+            286px !important;
+
+        max-width:
+            calc(100vw - 68px) !important;
+
+        box-sizing:
+            border-box;
+
+    }
+
+
+    .wind-crotone-tabs {
+
+        gap:
+            4px;
+
+        margin-bottom:
+            7px;
+
+        padding:
+            3px;
+
+    }
+
+
+    .wind-crotone-tab-btn {
+
+        min-height:
+            35px;
+
+        padding:
+            5px 4px;
+
+        font-size:
+            10.5px;
+
+        touch-action:
+            manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    .wind-crotone-marine-hero {
+
+        padding:
+            7px 8px;
+
+    }
+
+
+    .wind-crotone-marine-icon {
+
+        flex-basis:
+            37px;
+
+        width:
+            37px;
+
+        height:
+            37px;
+
+        font-size:
+            21px;
+
+    }
+
+
+    .wind-crotone-marine-hero strong {
+
+        font-size:
+            9.5px;
+
+    }
+
+
+    .wind-crotone-marine-hero-value {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .wind-crotone-marine-grid,
+    .wind-crotone-fishing-grid {
+
+        gap:
+            4px;
+
+    }
+
+
+    .wind-crotone-marine-metric {
+
+        min-height:
+            49px;
+
+        padding:
+            6px;
+
+    }
+
+
+    .wind-crotone-marine-label {
+
+        font-size:
+            9.5px;
+
+    }
+
+
+    .wind-crotone-marine-value {
+
+        font-size:
+            12px;
+
+    }
+
+
+    .wind-crotone-marine-detail {
+
+        font-size:
+            8.5px !important;
+
+    }
+
+
+    .wind-crotone-marine-note,
+    .wind-crotone-fishing-note {
+
+        font-size:
+            8px !important;
+
+    }
+
+
+    .wind-crotone-fishing-header {
+
+        grid-template-columns:
+            36px minmax(0, 1fr) auto;
+
+        gap:
+            7px;
+
+    }
+
+
+    .wind-crotone-fishing-icon {
+
+        width:
+            36px;
+
+        height:
+            36px;
+
+        font-size:
+            20px;
+
+    }
+
+
+    .wind-crotone-fishing-header strong {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .wind-crotone-fishing-header small {
+
+        font-size:
+            8.5px !important;
+
+    }
+
+
+    .wind-crotone-fishing-badge {
+
+        min-width:
+            52px;
+
+        padding:
+            6px;
+
+        font-size:
+            9px;
+
+    }
+
+
+    .wind-crotone-fishing-factors span {
+
+        font-size:
+            8px;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI MOLTO PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-panel {
+
+        min-width:
+            252px !important;
+
+        width:
+            252px !important;
+
+        max-width:
+            calc(100vw - 58px) !important;
+
+    }
+
+
+    .wind-crotone-tab-btn {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .wind-crotone-marine-label {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .wind-crotone-marine-value {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .wind-crotone-fishing-header strong {
+
+        font-size:
+            10.5px;
+
+    }
+
+
+    .wind-crotone-fishing-badge {
+
+        min-width:
+            48px;
+
+        font-size:
+            8.5px;
+
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE LANDSCAPE
+   ============================================================ */
+
+@media
+(max-height: 520px)
+and
+(orientation: landscape) {
+
+    .wind-crotone-panel {
+
+        max-height:
+            calc(100dvh - 20px);
+
+        overflow-y:
+            auto;
+
+        overscroll-behavior:
+            contain;
+
+    }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wind-crotone-tab-btn,
+    .wind-crotone-fishing-meter-bar {
+
+        transition:
+            none !important;
+
+    }
+
+}
+
+/* ============================================================
+   MARE + PESCA
+   TESTI PIÙ LEGGIBILI
+   Inserire IN FONDO ASSOLUTO al CSS
+   ============================================================ */
+
+
+/* ============================================================
+   TAB METEO / MARE / PESCA
+   ============================================================ */
+
+.wind-crotone-tab-btn {
+
+    font-size:
+        12px !important;
+
+    font-weight:
+        800 !important;
+
+}
+
+
+/* ============================================================
+   MARE - TITOLI / VALORI HERO
+   ============================================================ */
+
+.wind-crotone-marine-hero strong {
+
+    font-size:
+        11.5px !important;
+
+    font-weight:
+        800 !important;
+
+}
+
+
+.wind-crotone-marine-hero-value {
+
+    font-size:
+        18px !important;
+
+    font-weight:
+        800 !important;
+
+}
+
+
+/* ============================================================
+   MARE - ETICHETTE NEI RIQUADRI
+   Periodo onda
+   Swell
+   Temp. mare
+   Corrente
+   Onda vento
+   Livello mare
+   ============================================================ */
+
+.wind-crotone-marine-label {
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        700 !important;
+
+    color:
+        rgba(255,255,255,.76) !important;
+
+}
+
+
+/* ============================================================
+   MARE - VALORI PRINCIPALI
+   es. 0.8 m / 5.2 s / 24.1 °C
+   ============================================================ */
+
+.wind-crotone-marine-value {
+
+    font-size:
+        14px !important;
+
+    font-weight:
+        800 !important;
+
+    color:
+        #ffffff !important;
+
+}
+
+
+/* ============================================================
+   MARE - DETTAGLI SOTTO I VALORI
+   es. NE · 5.8 s
+   verso SE · 120°
+   ecc.
+   ============================================================ */
+
+.wind-crotone-marine-detail {
+
+    font-size:
+        10px !important;
+
+    font-weight:
+        650 !important;
+
+    color:
+        rgba(186,230,253,.82) !important;
+
+}
+
+
+/* ============================================================
+   NOTA MARE
+   ============================================================ */
+
+.wind-crotone-marine-note {
+
+    font-size:
+        9.5px !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.4 !important;
+
+    color:
+        rgba(255,255,255,.60) !important;
+
+}
+
+
+/* ============================================================
+   MARE NON DISPONIBILE
+   ============================================================ */
+
+.wind-crotone-marine-empty strong {
+
+    font-size:
+        12px !important;
+
+    font-weight:
+        800 !important;
+
+}
+
+
+.wind-crotone-marine-empty small {
+
+    font-size:
+        10px !important;
+
+    font-weight:
+        600 !important;
+
+    color:
+        rgba(255,255,255,.68) !important;
+
+}
+
+
+/* ============================================================
+   PESCA - TITOLO
+   ============================================================ */
+
+.wind-crotone-fishing-header strong {
+
+    font-size:
+        13px !important;
+
+    font-weight:
+        800 !important;
+
+}
+
+
+/* ============================================================
+   PESCA - SOTTOTITOLO
+   "Indice indicativo per pesca costiera"
+   ============================================================ */
+
+.wind-crotone-fishing-header small {
+
+    font-size:
+        10.5px !important;
+
+    font-weight:
+        650 !important;
+
+    color:
+        rgba(255,255,255,.70) !important;
+
+}
+
+
+/* ============================================================
+   BADGE
+   Alta / Buona / Moderata / Bassa
+   ============================================================ */
+
+.wind-crotone-fishing-badge {
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        800 !important;
+
+}
+
+
+/* ============================================================
+   SCORE
+   70/100 ecc.
+   ============================================================ */
+
+.wind-crotone-fishing-score {
+
+    font-size:
+        10.5px !important;
+
+    font-weight:
+        750 !important;
+
+    color:
+        rgba(255,255,255,.78) !important;
+
+}
+
+
+/* ============================================================
+   PESCA - RIQUADRI
+   usa gli stessi testi del blocco mare
+   ============================================================ */
+
+.wind-crotone-fishing-grid
+.wind-crotone-marine-label {
+
+    font-size:
+        11px !important;
+
+}
+
+
+.wind-crotone-fishing-grid
+.wind-crotone-marine-value {
+
+    font-size:
+        14px !important;
+
+}
+
+
+.wind-crotone-fishing-grid
+.wind-crotone-marine-detail {
+
+    font-size:
+        10px !important;
+
+}
+
+
+/* ============================================================
+   CHIP FATTORI
+   es. Mare gestibile / Corrente moderata
+   ============================================================ */
+
+.wind-crotone-fishing-factors span {
+
+    font-size:
+        9.5px !important;
+
+    font-weight:
+        700 !important;
+
+    color:
+        rgba(255,255,255,.78) !important;
+
+}
+
+
+/* ============================================================
+   NOTA PESCA
+   ============================================================ */
+
+.wind-crotone-fishing-note {
+
+    font-size:
+        9.5px !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.4 !important;
+
+    color:
+        rgba(255,255,255,.60) !important;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-tab-btn {
+
+        font-size:
+            11px !important;
+
+    }
+
+
+    .wind-crotone-marine-hero strong {
+
+        font-size:
+            10.5px !important;
+
+    }
+
+
+    .wind-crotone-marine-hero-value {
+
+        font-size:
+            16px !important;
+
+    }
+
+
+    .wind-crotone-marine-label {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-marine-value {
+
+        font-size:
+            13px !important;
+
+    }
+
+
+    .wind-crotone-marine-detail {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+
+    .wind-crotone-marine-note {
+
+        font-size:
+            9px !important;
+
+    }
+
+
+    .wind-crotone-marine-empty strong {
+
+        font-size:
+            11.5px !important;
+
+    }
+
+
+    .wind-crotone-marine-empty small {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+
+    .wind-crotone-fishing-header strong {
+
+        font-size:
+            12px !important;
+
+    }
+
+
+    .wind-crotone-fishing-header small {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-fishing-badge {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-fishing-score {
+
+        font-size:
+            10px !important;
+
+    }
+
+
+    .wind-crotone-fishing-factors span {
+
+        font-size:
+            9px !important;
+
+    }
+
+
+    .wind-crotone-fishing-note {
+
+        font-size:
+            9px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI MOLTO PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-tab-btn {
+
+        font-size:
+            10.5px !important;
+
+    }
+
+
+    .wind-crotone-marine-hero-value {
+
+        font-size:
+            15px !important;
+
+    }
+
+
+    .wind-crotone-marine-label {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+
+    .wind-crotone-marine-value {
+
+        font-size:
+            12px !important;
+
+    }
+
+
+    .wind-crotone-marine-detail {
+
+        font-size:
+            9px !important;
+
+    }
+
+
+    .wind-crotone-fishing-header strong {
+
+        font-size:
+            11.5px !important;
+
+    }
+
+
+    .wind-crotone-fishing-header small {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+
+    .wind-crotone-fishing-badge {
+
+        font-size:
+            9.5px !important;
+
+    }
+
+
+    .wind-crotone-fishing-factors span {
+
+        font-size:
+            8.5px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   METEO - TESTO RAFFICHE PIÙ GRANDE E LEGGIBILE
+   Inserire IN FONDO ASSOLUTO al CSS
+   ============================================================ */
+
+
+/* DESKTOP */
+.wind-crotone-weather-wind > small {
+
+    font-size:
+        13px !important;
+
+    font-weight:
+        700 !important;
+
+    line-height:
+        1.35 !important;
+
+    color:
+        rgba(255,255,255,.82) !important;
+
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-weather-wind > small {
+
+        font-size:
+            12.5px !important;
+
+        font-weight:
+            700 !important;
+
+        line-height:
+            1.4 !important;
+
+        color:
+            rgba(255,255,255,.86) !important;
+
+        margin-top:
+            3px;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI MOLTO PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-weather-wind > small {
+
+        font-size:
+            12px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   TUTTE LE SCHEDE
+   TESTO CONDIZIONI ATTUALI / GIORNO / ORA PIÙ LEGGIBILE
+   Inserire IN FONDO ASSOLUTO al CSS
+   ============================================================ */
+
+
+/* DESKTOP */
+.wind-crotone-panel-time {
+
+    font-size:
+        13px !important;
+
+    font-weight:
+        750 !important;
+
+    line-height:
+        1.35 !important;
+
+    color:
+        rgba(255,255,255,.84) !important;
+
+    margin-top:
+        7px !important;
+
+    margin-bottom:
+        4px !important;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel-time {
+
+        font-size:
+            12.5px !important;
+
+        font-weight:
+            750 !important;
+
+        line-height:
+            1.4 !important;
+
+        color:
+            rgba(255,255,255,.88) !important;
+
+        margin-top:
+            6px !important;
+
+        margin-bottom:
+            4px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI MOLTO PICCOLI
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-panel-time {
+
+        font-size:
+            12px !important;
+
+    }
+
+}
+
+/* ============================================================
+   COERENZA TESTI RIQUADRI
+   METEO + MARE + PESCA
+
+   - aumenta etichette e testi secondari
+   - NON modifica percentuali o valori principali
+   - stesso formato leggibile della scheda Pesca
+   - desktop + mobile
+   ============================================================ */
+
+
+/* ============================================================
+   DESKTOP
+   ============================================================ */
+
+
+/* METEO
+   Precipit. / Nuvole / Umidità / Pressione */
+.wind-crotone-weather-metric-label {
+
+    font-size:
+        11.5px !important;
+
+    font-weight:
+        750 !important;
+
+    line-height:
+        1.2 !important;
+
+    color:
+        rgba(255,255,255,.82) !important;
+
+}
+
+
+/* METEO
+   testo secondario tipo 0.0 mm
+   Le percentuali NON vengono toccate */
+.wind-crotone-weather-metric-detail {
+
+    font-size:
+        10.5px !important;
+
+    font-weight:
+        650 !important;
+
+    line-height:
+        1.25 !important;
+
+    color:
+        rgba(186,230,253,.86) !important;
+
+}
+
+
+/* MARE + PESCA
+   Periodo onda / Swell / Temp. mare /
+   Corrente / Onda vento / Livello mare */
+.wind-crotone-marine-label {
+
+    font-size:
+        11.5px !important;
+
+    font-weight:
+        750 !important;
+
+    line-height:
+        1.2 !important;
+
+    color:
+        rgba(255,255,255,.82) !important;
+
+}
+
+
+/* MARE + PESCA
+   dettagli secondari:
+   Picco 5.4 s
+   SE · 7.2 s
+   verso NE
+   ecc. */
+.wind-crotone-marine-detail {
+
+    font-size:
+        10.5px !important;
+
+    font-weight:
+        650 !important;
+
+    line-height:
+        1.25 !important;
+
+    color:
+        rgba(186,230,253,.86) !important;
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+
+    /* METEO:
+       Precipit. / Nuvole / Umidità / Pressione */
+    .wind-crotone-weather-metric-label {
+
+        font-size:
+            11.5px !important;
+
+        font-weight:
+            750 !important;
+
+        line-height:
+            1.25 !important;
+
+    }
+
+
+    /* METEO:
+       0.0 mm ecc.
+       NON modifica 5%, 67%, 80% ecc. */
+    .wind-crotone-weather-metric-detail {
+
+        font-size:
+            10.5px !important;
+
+        font-weight:
+            650 !important;
+
+        line-height:
+            1.3 !important;
+
+    }
+
+
+    /* MARE + PESCA */
+    .wind-crotone-marine-label {
+
+        font-size:
+            11.5px !important;
+
+        font-weight:
+            750 !important;
+
+        line-height:
+            1.25 !important;
+
+    }
+
+
+    .wind-crotone-marine-detail {
+
+        font-size:
+            10.5px !important;
+
+        font-weight:
+            650 !important;
+
+        line-height:
+            1.3 !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   TELEFONI MOLTO PICCOLI
+   Manteniamo comunque la leggibilità
+   ============================================================ */
+
+@media (max-width: 380px) {
+
+    .wind-crotone-weather-metric-label,
+    .wind-crotone-marine-label {
+
+        font-size:
+            11px !important;
+
+    }
+
+
+    .wind-crotone-weather-metric-detail,
+    .wind-crotone-marine-detail {
+
+        font-size:
+            10px !important;
+
+    }
+
+}
+
+
+/* ============================================================
+   CROTONE LOCAL GUIDE
+   TOGGLE ORARI STANDARD / NOTTURNI
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   RIGA DATA / ORA
+   Lo spazio a destra serve al pulsante ☾ / ☀
+   senza aumentare l'altezza del popup.
+   ------------------------------------------------------------ */
+
+.wind-crotone-panel-time {
+    position: relative !important;
+    padding-right: 26px !important;
+}
+
+
+.wind-crotone-panel-time-text {
+    display: block;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ------------------------------------------------------------
+   PULSANTE NOTTE / GIORNO
+   ------------------------------------------------------------ */
+
+.wind-crotone-night-toggle {
+    position: absolute;
+
+    top: 50%;
+    right: 0;
+
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, .14);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, .045);
+
+    color:
+        rgba(255, 255, 255, .84);
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 2;
+
+    transition:
+        color .15s ease,
+        background .15s ease,
+        border-color .15s ease,
+        box-shadow .15s ease,
+        transform .15s ease;
+}
+
+
+.wind-crotone-night-toggle:hover {
+    color: #fff;
+
+    border-color:
+        rgba(56, 189, 248, .48);
+
+    background:
+        rgba(56, 189, 248, .12);
+}
+
+
+.wind-crotone-night-toggle:active {
+    transform:
+        translateY(-50%)
+        scale(.94);
+}
+
+
+/* modalità notte attiva */
+
+.wind-crotone-night-toggle.is-active {
+    color: #fff;
+
+    border-color:
+        rgba(125, 211, 252, .62);
+
+    background:
+        rgba(14, 165, 233, .22);
+
+    box-shadow:
+        0 0 8px
+        rgba(56, 189, 248, .16);
+}
+
+
+/* accessibilità tastiera */
+
+.wind-crotone-night-toggle:focus-visible {
+    outline:
+        2px solid
+        rgba(125, 211, 252, .85);
+
+    outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------
+   GRIGLIA ORARI NOTTURNI
+
+   20:00 | 23:00 | 00:00
+   03:00 | 06:00 | 09:00
+   ------------------------------------------------------------ */
+
+.wind-crotone-hours.is-night {
+    grid-template-columns:
+        repeat(3, 1fr) !important;
+}
+
+
+/* leggerissima distinzione grafica */
+
+.wind-crotone-hours.is-night
+.wind-crotone-hour-btn {
+    border-color:
+        rgba(125, 211, 252, .14);
+}
+
+
+/* ora notturna selezionata */
+
+.wind-crotone-hours.is-night
+.wind-crotone-hour-btn.is-active {
+    color: #fff;
+
+    border-color:
+        rgba(125, 211, 252, .72);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(14, 165, 233, .39),
+            rgba(37, 99, 235, .27)
+        );
+
+    box-shadow:
+        0 0 8px
+        rgba(56, 189, 248, .10);
+}
+
+
+/* ------------------------------------------------------------
+   FRAME NON DISPONIBILE
+
+   Può capitare se il PHP non restituisce ancora
+   una delle ore notturne.
+   ------------------------------------------------------------ */
+
+.wind-crotone-hour-btn.is-unavailable,
+.wind-crotone-hour-btn:disabled {
+    opacity: .32 !important;
+
+    cursor: default !important;
+
+    transform: none !important;
+
+    box-shadow: none !important;
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel-time {
+        padding-right:
+            25px !important;
+    }
+
+
+    .wind-crotone-night-toggle {
+        width: 20px;
+
+        height: 20px;
+
+        font-size: 13px;
+
+        touch-action:
+            manipulation;
+
+        -webkit-tap-highlight-color:
+            transparent;
+    }
+
+
+    .wind-crotone-hours.is-night {
+        grid-template-columns:
+            repeat(3, 1fr) !important;
+
+        gap:
+            4px !important;
+    }
+
+}
+
+
+/* ============================================================
+   CROTONE LOCAL GUIDE
+   GRAFICO MAREA
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   LIVELLO MARE CLICCABILE
+   ------------------------------------------------------------ */
+
+.wind-crotone-marine-metric.is-tide-trigger {
+    position: relative;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition:
+        background .16s ease,
+        border-color .16s ease,
+        transform .16s ease,
+        box-shadow .16s ease;
+}
+
+
+.wind-crotone-marine-metric.is-tide-trigger::after {
+    content: "⌁";
+
+    position: absolute;
+
+    top: 7px;
+    right: 8px;
+
+    font-size: 14px;
+    line-height: 1;
+
+    color:
+        rgba(125,211,252,.88);
+}
+
+
+.wind-crotone-marine-metric.is-tide-trigger:hover,
+.wind-crotone-marine-metric.is-tide-trigger:focus-visible {
+    border-color:
+        rgba(56,189,248,.48) !important;
+
+    background:
+        rgba(56,189,248,.08) !important;
+
+    box-shadow:
+        0 0 9px
+        rgba(56,189,248,.08);
+}
+
+
+.wind-crotone-marine-metric.is-tide-trigger:active {
+    transform:
+        scale(.985);
+}
+
+
+/* ------------------------------------------------------------
+   CONTENITORE
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-panel {
+    margin-top: 10px;
+
+    padding-top: 9px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.11);
+}
+
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin-bottom: 4px;
+}
+
+
+.wind-crotone-tide-header > div {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1px;
+}
+
+
+.wind-crotone-tide-header strong {
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color:
+        rgba(255,255,255,.94);
+}
+
+
+.wind-crotone-tide-header small {
+    font-size: 9px;
+
+    font-weight: 600;
+
+    color:
+        rgba(255,255,255,.55);
+}
+
+
+/* ------------------------------------------------------------
+   TASTO RITORNO
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-back {
+    width: 26px;
+    height: 26px;
+
+    flex: 0 0 26px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color:
+        rgba(255,255,255,.86);
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    transition:
+        background .15s ease,
+        border-color .15s ease,
+        transform .15s ease;
+}
+
+
+.wind-crotone-tide-back:hover {
+    color: #fff;
+
+    border-color:
+        rgba(56,189,248,.52);
+
+    background:
+        rgba(56,189,248,.12);
+}
+
+
+.wind-crotone-tide-back:active {
+    transform:
+        scale(.93);
+}
+
+
+/* ------------------------------------------------------------
+   SVG
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-svg {
+    display: block;
+
+    width: 100%;
+
+    height: 145px;
+
+    overflow: visible;
+}
+
+
+/* griglia */
+
+.wind-crotone-tide-grid-line {
+    stroke:
+        rgba(255,255,255,.075);
+
+    stroke-width: 1;
+
+    vector-effect:
+        non-scaling-stroke;
+}
+
+
+/* livello medio globale */
+
+.wind-crotone-tide-zero {
+    stroke:
+        rgba(255,255,255,.17);
+
+    stroke-width: 1;
+
+    stroke-dasharray: 4 4;
+
+    vector-effect:
+        non-scaling-stroke;
+}
+
+
+/* area */
+
+.wind-crotone-tide-area {
+    fill:
+        url(#wind-crotone-tide-gradient);
+
+    stroke: none;
+}
+
+
+/* curva principale */
+
+.wind-crotone-tide-line {
+    fill: none;
+
+    stroke:
+        rgba(125,211,252,.96);
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    vector-effect:
+        non-scaling-stroke;
+}
+
+
+/* asse orario */
+
+.wind-crotone-tide-axis-text {
+    fill:
+        rgba(255,255,255,.48);
+
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+
+/* ------------------------------------------------------------
+   MARKER
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-marker {
+    stroke:
+        rgba(8,18,28,.95);
+
+    stroke-width: 2;
+
+    vector-effect:
+        non-scaling-stroke;
+}
+
+
+.wind-crotone-tide-marker.is-high {
+    fill:
+        #7dd3fc;
+}
+
+
+.wind-crotone-tide-marker.is-low {
+    fill:
+        #818cf8;
+}
+
+
+.wind-crotone-tide-marker.is-current {
+    fill:
+        #ffffff;
+
+    stroke:
+        #0284c7;
+
+    stroke-width: 3;
+}
+
+
+.wind-crotone-tide-marker-text {
+    font-family:
+        "Raleway",
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 850;
+
+    letter-spacing: .4px;
+}
+
+
+.wind-crotone-tide-marker-text.is-high {
+    fill:
+        rgba(186,230,253,.98);
+}
+
+
+.wind-crotone-tide-marker-text.is-low {
+    fill:
+        rgba(199,210,254,.96);
+}
+
+
+.wind-crotone-tide-marker-text.is-current {
+    fill:
+        #ffffff;
+}
+
+
+/* ------------------------------------------------------------
+   TRE DATI: ALTA / ORA / BASSA
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 5px;
+
+    margin-top: 1px;
+}
+
+
+.wind-crotone-tide-stat {
+    min-width: 0;
+
+    padding:
+        6px 4px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    text-align: center;
+}
+
+
+.wind-crotone-tide-stat span {
+    display: block;
+
+    margin-bottom: 2px;
+
+    font-size: 8px;
+
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: .4px;
+
+    color:
+        rgba(255,255,255,.48);
+}
+
+
+.wind-crotone-tide-stat strong {
+    display: block;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color:
+        rgba(255,255,255,.94);
+}
+
+
+.wind-crotone-tide-stat small {
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 8px;
+
+    font-weight: 650;
+
+    color:
+        rgba(125,211,252,.82);
+}
+
+
+/* ------------------------------------------------------------
+   NOTA
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-note {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 8px;
+
+    line-height: 1.35;
+
+    color:
+        rgba(255,255,255,.43);
+}
+
+
+/* ------------------------------------------------------------
+   DATI INSUFFICIENTI
+   ------------------------------------------------------------ */
+
+.wind-crotone-tide-empty {
+    min-height: 105px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 12px;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    color:
+        rgba(255,255,255,.55);
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------ */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-tide-svg {
+        height: 132px;
+    }
+
+
+    .wind-crotone-tide-header strong {
+        font-size: 10px;
+    }
+
+
+    .wind-crotone-tide-back {
+        width: 25px;
+
+        height: 25px;
+
+        flex-basis: 25px;
+    }
+
+
+    .wind-crotone-tide-stat {
+        padding:
+            5px 3px;
+    }
+
+
+    .wind-crotone-tide-stat strong {
+        font-size: 10px;
+    }
+
+
+    .wind-crotone-tide-stat small {
+        font-size: 8px;
+    }
+
+}
+
+
+/* ============================================================
+   ALLERTE UFFICIALI DPC
+   ============================================================ */
+
+.wind-crotone-alert-bar {
+    width: 100%;
+    min-height: 34px;
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) 18px;
+    align-items: center;
+    gap: 6px;
+    margin: 3px 0 6px;
+    padding: 6px 8px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #fff;
+    background: rgba(255,255,255,.04);
+    cursor: pointer;
+    font-family: "Raleway", sans-serif;
+    text-align: left;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.wind-crotone-alert-bar:hover {
+    filter: brightness(1.06);
+}
+
+.wind-crotone-alert-bar:focus-visible,
+.wind-crotone-alert-back:focus-visible {
+    outline: 2px solid rgba(125,211,252,.9);
+    outline-offset: 2px;
+}
+
+.wind-crotone-alert-bar.is-yellow {
+    border-color: rgba(250,204,21,.68);
+    background: rgba(250,204,21,.13);
+}
+
+.wind-crotone-alert-bar.is-orange {
+    border-color: rgba(251,146,60,.72);
+    background: rgba(251,146,60,.14);
+}
+
+.wind-crotone-alert-bar.is-red {
+    border-color: rgba(239,68,68,.76);
+    background: rgba(239,68,68,.16);
+}
+
+.wind-crotone-alert-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.wind-crotone-alert-bar.is-yellow .wind-crotone-alert-icon {
+    color: #fde047;
+}
+
+.wind-crotone-alert-bar.is-orange .wind-crotone-alert-icon {
+    color: #fdba74;
+}
+
+.wind-crotone-alert-bar.is-red .wind-crotone-alert-icon {
+    color: #fca5a5;
+}
+
+.wind-crotone-alert-text {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.wind-crotone-alert-text strong {
+    flex: 0 0 auto;
+    font-size: 10.5px;
+    font-weight: 850;
+    line-height: 1.1;
+}
+
+.wind-crotone-alert-separator {
+    opacity: .6;
+}
+
+.wind-crotone-alert-summary {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.wind-crotone-alert-arrow {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    text-align: right;
+}
+
+.wind-crotone-alert-unavailable {
+    margin: 3px 0 6px;
+    padding: 6px 8px;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 9px;
+    color: rgba(255,255,255,.68);
+    background: rgba(255,255,255,.035);
+    font-family: "Raleway", sans-serif;
+    font-size: 9.5px;
+    font-weight: 650;
+    line-height: 1.3;
+}
+
+
+/* DETTAGLIO */
+
+
+
+.wind-crotone-alert-details {
+    width: 100%;
+    margin-top: 2px;
+    padding: 9px;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 11px;
+    box-sizing: border-box;
+    background: rgba(255,255,255,.035);
+}
+
+.wind-crotone-alert-details.is-yellow {
+    border-color: rgba(250,204,21,.55);
+}
+
+.wind-crotone-alert-details.is-orange {
+    border-color: rgba(251,146,60,.60);
+}
+
+.wind-crotone-alert-details.is-red {
+    border-color: rgba(239,68,68,.65);
+}
+
+.wind-crotone-alert-back {
+    margin: 0 0 8px;
+    padding: 4px 0;
+    border: 0;
+    color: rgba(186,230,253,.9);
+    background: transparent;
+    cursor: pointer;
+    font-family: "Raleway", sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.wind-crotone-alert-details-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+}
+
+.wind-crotone-alert-details-head > div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.wind-crotone-alert-details-head small {
+    color: rgba(255,255,255,.55) !important;
+    font-size: 9.5px !important;
+    font-weight: 750 !important;
+}
+
+.wind-crotone-alert-details-head strong {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 850;
+}
+
+.wind-crotone-alert-level {
+    min-width: 58px;
+    padding: 6px 8px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: rgba(0,0,0,.16);
+    font-size: 9.5px;
+    font-weight: 850;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.wind-crotone-alert-details.is-yellow .wind-crotone-alert-level {
+    color: #fde047;
+}
+
+.wind-crotone-alert-details.is-orange .wind-crotone-alert-level {
+    color: #fdba74;
+}
+
+.wind-crotone-alert-details.is-red .wind-crotone-alert-level {
+    color: #fca5a5;
+}
+
+.wind-crotone-alert-risk-list {
+    display: grid;
+    gap: 5px;
+    margin-top: 9px;
+}
+
+.wind-crotone-alert-risk {
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 7px;
+    border: 1px solid rgba(255,255,255,.07);
+    border-radius: 8px;
+    background: rgba(255,255,255,.025);
+}
+
+.wind-crotone-alert-risk strong {
+    color: #fff;
+    font-size: 10px;
+    font-weight: 750;
+}
+
+.wind-crotone-alert-risk span {
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.wind-crotone-alert-risk.is-yellow span {
+    color: #fde047;
+}
+
+.wind-crotone-alert-risk.is-orange span {
+    color: #fdba74;
+}
+
+.wind-crotone-alert-risk.is-red span {
+    color: #fca5a5;
+}
+
+.wind-crotone-alert-risk.is-none span {
+    color: rgba(255,255,255,.64);
+}
+
+.wind-crotone-alert-risk.is-unavailable span {
+    color: rgba(255,255,255,.45);
+}
+
+.wind-crotone-alert-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.wind-crotone-alert-meta-row {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px;
+    border-radius: 8px;
+    background: rgba(255,255,255,.025);
+}
+
+.wind-crotone-alert-meta-row span {
+    color: rgba(255,255,255,.5);
+    font-size: 8.5px;
+    font-weight: 650;
+}
+
+.wind-crotone-alert-meta-row strong {
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.wind-crotone-alert-note {
+    display: block;
+    margin-top: 7px;
+    color: rgba(255,255,255,.64) !important;
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+}
+
+.wind-crotone-alert-source {
+    display: inline-block;
+    margin-top: 9px !important;
+    color: rgba(186,230,253,.9) !important;
+    font-size: 9px !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.wind-crotone-alert-source:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 600px) {
+
+    
+
+    .wind-crotone-alert-bar {
+        min-height: 33px;
+        padding: 5px 6px;
+    }
+
+    .wind-crotone-alert-text strong {
+        font-size: 10px;
+    }
+
+    .wind-crotone-alert-summary {
+        font-size: 9.5px;
+    }
+
+    .wind-crotone-alert-meta {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+/* ============================================================
+   WIND PANEL - OVERFLOW VERTICALE DI SICUREZZA
+
+   Non modifica l'altezza normale del popup.
+   La scrollbar compare soltanto quando il contenuto
+   supera l'altezza massima disponibile.
+   ============================================================ */
+
+.wind-crotone-panel {
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* scrollbar Chromium / Edge / Chrome / Safari */
+
+.wind-crotone-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.wind-crotone-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.wind-crotone-panel::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.20);
+    border-radius: 999px;
+}
+
+.wind-crotone-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,.32);
+}
+
+
+/* Firefox */
+
+.wind-crotone-panel {
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(255,255,255,.20)
+        transparent;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel {
+        max-height: calc(100vh - 20px);
+    }
+
+}
+
+
+/* ============================================================
+   OVERFLOW VERTICALE PANNELLO METEO
+   Entra in funzione solo quando il contenuto supera
+   l'altezza massima disponibile.
+   ============================================================ */
+
+.wind-crotone-panel {
+    max-height: calc(100vh - 120px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(255,255,255,.24)
+        transparent;
+}
+
+
+/* Chrome / Edge / Safari */
+
+.wind-crotone-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.wind-crotone-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.wind-crotone-panel::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,.24);
+    border-radius: 10px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .wind-crotone-panel {
+        max-height: calc(100vh - 90px) !important;
+    }
+
+}
